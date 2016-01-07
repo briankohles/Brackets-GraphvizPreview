@@ -1,0 +1,12 @@
+{
+    "name": "briankohles.graphviz-preview",
+    "title": "Graphviz Preview",
+    "description": "Live preview of Graphviz DOT format documents",
+    "homepage": "https://github.com/briankohles/Brackets-GraphvizPreview",
+    "version": "0.1",
+    "author": "Brian Kohles (http://github.com/briankohles)",
+    "license": "MIT",
+    "engines": {
+        "brackets": ">=1.1"
+    }
+}

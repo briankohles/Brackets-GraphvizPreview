@@ -1,0 +1,4 @@
+graph test1 {
+	test23 -- success
+	hello -- goodbye
+}
