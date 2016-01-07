@@ -3,7 +3,7 @@
     "title": "Graphviz Preview",
     "description": "Live preview of Graphviz DOT format documents",
     "homepage": "https://github.com/briankohles/Brackets-GraphvizPreview",
-    "version": "0.1",
+    "version": "1.0",
     "author": "Brian Kohles (http://github.com/briankohles)",
     "license": "MIT",
     "engines": {

@@ -8,7 +8,6 @@ A [Brackets](https://brackets.io) extension that provides a live preview of Grap
 
 ### Installation
 
-* From the [projects GitHub page](https://github.com/briankohles/Brackets-GraphvizPreview) choose "Download Zip"
 * Select **File > Extension Manager...** (or click the "brick" icon in the toolbar)
 * Click "Install from URL..."
 * Paste [https://github.com/briankohles/Brackets-GraphvizPreview/archive/master.zip](https://github.com/briankohles/Brackets-GraphvizPreview/archive/master.zip) into the field, and click "Install"

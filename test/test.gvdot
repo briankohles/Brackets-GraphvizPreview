@@ -1,4 +1,6 @@
-graph test1 {
-	test23 -- success
-	hello -- goodbye
+digraph test1 {
+	node [shape=square]
+	Hello -> World
+	
 }
+
