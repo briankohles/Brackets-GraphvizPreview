@@ -43,18 +43,15 @@ define(function (require, exports, module) {
 
     // Templates
     var panelHTML       = require("text!templates/panel.html"),
-        previewHTML     = require("text!templates/preview.html"),
-        settingsHTML    = require("text!templates/settings.html");
+        previewHTML     = require("text!templates/preview.html");
 
     // Local modules
-    var marked          = require("lib/viz");
+    require("lib/viz");
 
     // jQuery objects
     var $icon,
         $iframe,
-        $panel,
-        $settingsToggle,
-        $settings;
+        $panel;
 
     // Other vars
     var currentDoc,
@@ -66,10 +63,7 @@ define(function (require, exports, module) {
         realVisibility = false;
 
     // Prefs
-    var _prefs = PreferencesManager.getExtensionPrefs("markdown-preview");
-    _prefs.definePreference("useGFM", "boolean", false);
-    _prefs.definePreference("theme", "string", "clean");
-    _prefs.definePreference("syncScroll", "boolean", true);
+    var _prefs = PreferencesManager.getExtensionPrefs("graphviz-preview");
 
     // (based on code in brackets.js)
     function _handleLinkClick(e) {
@@ -87,8 +81,6 @@ define(function (require, exports, module) {
             node = node.parentElement;
         }
 
-        // Close settings dropdown, if open
-        _hideSettings();
     }
 
     function _calcScrollPos() {
@@ -100,11 +92,6 @@ define(function (require, exports, module) {
     }
 
     function _editorScroll() {
-        if (_prefs.get("syncScroll") && $iframe) {
-            var scrollTop = _calcScrollPos();
-
-            $iframe[0].contentDocument.body.scrollTop = scrollTop;
-        }
     }
 
     function _loadDoc(doc, isReload) {
@@ -122,11 +109,9 @@ define(function (require, exports, module) {
 
             if (isReload) {
                 scrollPos = $iframe.contents()[0].body.scrollTop;
-            } else if (_prefs.get("syncScroll")) {
-                scrollPos = _calcScrollPos();
-            }
+            } 
 
-            // Parse markdown into HTML
+            // Parse Graphviz into HTML
             bodyText = Viz(docText);
 	    //alert("BODYTEXT"+bodyText);
 
@@ -145,7 +130,7 @@ define(function (require, exports, module) {
                 // Assemble the HTML source
                 var htmlSource = _.template(previewHTML)({
                     baseUrl    : baseUrl,
-                    themeUrl   : require.toUrl("./themes/" + _prefs.get("theme") + ".css"),
+                    themeUrl   : require.toUrl("./themes/clean.css"),
                     scrollTop  : scrollPos,
                     bodyText   : bodyText
                 });
@@ -182,70 +167,15 @@ define(function (require, exports, module) {
     }
 
     function _updateSettings() {
-        // Format
-        var useGFM = _prefs.get("useGFM");
-        marked.setOptions({
-            breaks: useGFM,
-            gfm: useGFM
-        });
-
-        // Re-render
-        _loadDoc(currentDoc);
     }
 
     function _documentClicked(e) {
-        if (!$settings.is(e.target) &&
-                !$settingsToggle.is(e.target) &&
-                $settings.has(e.target).length === 0) {
-            _hideSettings();
-        }
     }
 
     function _hideSettings() {
-        if ($settings) {
-            $settings.remove();
-            $settings = null;
-            $(window.document).off("mousedown", _documentClicked);
-        }
     }
 
     function _showSettings(e) {
-        _hideSettings();
-
-        $settings = $(settingsHTML)
-            .css({
-                right: 12,
-                top: $settingsToggle.position().top + $settingsToggle.outerHeight() + 12
-            })
-            .appendTo($panel);
-
-        $settings.find("#markdown-preview-format")
-            .prop("selectedIndex", _prefs.get("useGFM") ? 1 : 0)
-            .change(function (e) {
-                _prefs.set("useGFM", e.target.selectedIndex === 1);
-                _updateSettings();
-            });
-
-        $settings.find("#markdown-preview-theme")
-            .val(_prefs.get("theme"))
-            .change(function (e) {
-                _prefs.set("theme", e.target.value);
-                _updateSettings();
-            });
-
-        var $syncScroll = $settings.find("#markdown-preview-sync-scroll");
-
-        $syncScroll.change(function (e) {
-            _prefs.set("syncScroll", e.target.checked);
-            _editorScroll();
-        });
-
-        if (_prefs.get("syncScroll")) {
-            $syncScroll.attr("checked", true);
-        }
-
-        PopUpManager.addPopUp($settings, _hideSettings, true);
-        $(window.document).on("mousedown", _documentClicked);
     }
 
     function _setPanelVisibility(isVisible) {
@@ -257,24 +187,15 @@ define(function (require, exports, module) {
         if (isVisible) {
             if (!panel) {
                 $panel = $(panelHTML);
-                $iframe = $panel.find("#panel-markdown-preview-frame");
+                $iframe = $panel.find("#panel-graphviz-preview-frame");
 
-                panel = WorkspaceManager.createBottomPanel("markdown-preview-panel", $panel);
+                panel = WorkspaceManager.createBottomPanel("graphviz-preview-panel", $panel);
                 $panel.on("panelResizeUpdate", function (e, newSize) {
                     $iframe.attr("height", newSize);
                 });
                 $iframe.attr("height", $panel.height());
 
                 window.setTimeout(_resizeIframe);
-
-                $settingsToggle = $("#markdown-settings-toggle")
-                    .click(function (e) {
-                        if ($settings) {
-                            _hideSettings();
-                        } else {
-                            _showSettings(e);
-                        }
-                    });
 
                 $iframe.hide();
             }
@@ -333,12 +254,12 @@ define(function (require, exports, module) {
     _editorScroll = _.debounce(_editorScroll, 1);
 
     // Insert CSS for this extension
-    ExtensionUtils.loadStyleSheet(module, "styles/MarkdownPreview.css");
+    ExtensionUtils.loadStyleSheet(module, "styles/GraphvizPreview.css");
 
     // Add toolbar icon
     $icon = $("<a>")
         .attr({
-            id: "markdown-preview-icon",
+            id: "graphviz-preview-icon",
             href: "#"
         })
         .css({
@@ -351,7 +272,7 @@ define(function (require, exports, module) {
     MainViewManager.on("currentFileChange", _currentDocChangedHandler);
 
     viewMenu = Menus.getMenu(Menus.AppMenuBar.VIEW_MENU);
-    toggleCmd = CommandManager.register("Markdown Preview", "toggleMarkdownPreview", _toggleVisibility);
+    toggleCmd = CommandManager.register("Graphviz Preview", "toggleGraphvizPreview", _toggleVisibility);
 
     viewMenu.addMenuItem(toggleCmd);
 
