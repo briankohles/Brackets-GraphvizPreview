@@ -1,4 +1,7 @@
 /*
+ * Copyright (c) 2016 Brian Kohles
+ *
+ * Based on the Brackets Extension Markdown Preview by Glenn Ruehle
  * Copyright (c) 2012 Glenn Ruehle
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -35,7 +38,6 @@ define(function (require, exports, module) {
         FileUtils           = brackets.getModule("file/FileUtils"),
         MainViewManager     = brackets.getModule("view/MainViewManager"),
         PopUpManager        = brackets.getModule("widgets/PopUpManager"),
-        PreferencesManager  = brackets.getModule("preferences/PreferencesManager"),
         WorkspaceManager    = brackets.getModule("view/WorkspaceManager"),
         CommandManager      = brackets.getModule("command/CommandManager"),
         Menus               = brackets.getModule("command/Menus"),
@@ -61,9 +63,6 @@ define(function (require, exports, module) {
         toggleCmd,
         visible = false,
         realVisibility = false;
-
-    // Prefs
-    var _prefs = PreferencesManager.getExtensionPrefs("graphviz-preview");
 
     // (based on code in brackets.js)
     function _handleLinkClick(e) {
@@ -112,7 +111,12 @@ define(function (require, exports, module) {
             } 
 
             // Parse Graphviz into HTML
-            bodyText = Viz(docText);
+	    var validDot = _validateDotText(docText);
+            if (validDot) {
+	    	bodyText = Viz(docText);
+	    } else {
+		console.log("DOT Syntax invalid");
+	    }	
 	    //alert("BODYTEXT"+bodyText);
 
             // Show URL in link tooltip
@@ -164,18 +168,6 @@ define(function (require, exports, module) {
             var iframeWidth = panel.$panel.innerWidth();
             $iframe.attr("width", iframeWidth + "px");
         }
-    }
-
-    function _updateSettings() {
-    }
-
-    function _documentClicked(e) {
-    }
-
-    function _hideSettings() {
-    }
-
-    function _showSettings(e) {
     }
 
     function _setPanelVisibility(isVisible) {
@@ -244,6 +236,32 @@ define(function (require, exports, module) {
         _setPanelVisibility(visible);
 
         toggleCmd.setChecked(visible);
+    }
+
+    function _validateDotText(docText) {
+   	// verify that our text is valid DOT file
+	// for now we just count braces, brackets, & quotes
+	
+	// count the number of curly braces
+	// console.log("CURLY-L:"+(docText.match(/\{/g).length) || []);
+	// console.log("CURLY-R:"+(docText.match(/\}/g).length) || []);
+	// return false if curly count is off
+	if ((docText.match(/\{/g).length) != (docText.match(/\}/g).length)) {
+		return false;
+	}
+	// return false if square count is off
+	// console.log("SQUARE-L:"+(docText.match(/\[/g).length) || []);
+	// console.log("SQUARE-R:"+(docText.match(/\]/g).length) || []);
+	if ((docText.match(/\[/g).length) != (docText.match(/\]/g).length)) {
+		return false;
+	}
+	// return false if odd number of quotes
+	// console.log("QUOTES:"+(docText.match(/\"/g).length)%2 || []);
+	if ((docText.match(/\"/g).length)%2 > 0) {
+		return false;
+	}
+
+	return true;
     }
 
     // Debounce event callback to avoid excess overhead
