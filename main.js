@@ -1,7 +1,8 @@
 /*
+ * Graphviz Preview Brackets extension
  * Copyright (c) 2016 Brian Kohles
  *
- * Based on the Brackets Extension Markdown Preview by Glenn Ruehle
+ * Based on the MarkdownPreview Brackets extension
  * Copyright (c) 2012 Glenn Ruehle
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
