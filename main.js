@@ -70,8 +70,12 @@ define(function (require, exports, module) {
         // Check parents too, in case link has inline formatting tags
         var node = e.target, url;
         while (node) {
-            if (node.tagName === "A") {
-                url = node.getAttribute("href");
+		//console.log("LINKNODE:"+node.tagName+";");
+	    // TODO: submit this change to markdown preview
+            if (node.tagName.match(/^a$/i)) {
+	    	//console.log("IN A TAG");
+                url = node.getAttribute("xlink:href");
+	        //console.log("Opening URL:"+url+" in default browser");
                 if (url && !url.match(/^#/)) {
                     NativeApp.openURLInDefaultBrowser(url);
                 }
