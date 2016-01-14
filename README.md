@@ -1,8 +1,6 @@
 # Graphviz Preview
 
-**NOTE:** This is a VERY early version.
-
-A [Brackets](https://brackets.io) extension that provides a live preview of Graphviz DOT format documents. 
+A [Brackets](https://brackets.io) extension that provides a live preview of [Graphviz](http://www.graphviz.org) DOT format documents. 
 
 ![Alt text](./screenshots/graphviz-preview.png?raw=true "Graphviz Preview")
 
@@ -22,8 +20,15 @@ or click them to open in your default browser.
 
 Hover over the preview area to show the settings "gear" icon. Click this icon to change the settings.
 
-### Settings
-* TODO
+### About Graphviz and the DOT Language
+
+Documentation of the DOT language can be found at:
+* [Graphviz Documentation](http://www.graphviz.org/Documentation.php)
+* [The DOT Language](http://www.graphviz.org/content/dot-language)
+* [Node, Edge and Graph Attributes](http://www.graphviz.org/content/attrs)
+* [Node Shapes](http://www.graphviz.org/content/node-shapes)
+* [Arrow Shapes](http://www.graphviz.org/content/arrow-shapes)
+* [Colors](http://www.graphviz.org/content/color-names)
 
 ### Credits
 This extension is based on the MarkdownPreview extension by Glenn Ruehle
