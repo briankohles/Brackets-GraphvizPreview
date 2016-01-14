@@ -121,14 +121,15 @@ define(function (require, exports, module) {
 	    	bodyText = Viz(docText);
 	    } else {
 		console.log("DOT Syntax invalid");
+		bodyText = '<div id="invalid-dot-syntax">Invalid Dot Syntax</div>';
 	    }	
 	    //alert("BODYTEXT"+bodyText);
 
             // Show URL in link tooltip
-            bodyText = bodyText.replace(/(href=\"([^\"]*)\")/g, "$1 title=\"$2\"");
+            // bodyText = bodyText.replace(/(href=\"([^\"]*)\")/g, "$1 title=\"$2\"");
 
             // Convert protocol-relative URLS
-            bodyText = bodyText.replace(/src="\/\//g, "src=\"http://");
+            // bodyText = bodyText.replace(/src="\/\//g, "src=\"http://");
 
             if (isReload) {
                 $iframe[0].contentDocument.body.innerHTML = bodyText;
