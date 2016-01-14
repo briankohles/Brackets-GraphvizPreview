@@ -8,7 +8,7 @@ A [Brackets](https://brackets.io) extension that provides a live preview of [Gra
 
 * Select **File > Extension Manager...** (or click the "brick" icon in the toolbar)
 * Click "Install from URL..."
-* Paste [https://github.com/briankohles/Brackets-GraphvizPreview/archive/master.zip](https://github.com/briankohles/Brackets-GraphvizPreview/archive/master.zip) into the field, and click "Install"
+* Paste [https://github.com/briankohles/Brackets-GraphvizPreview](https://github.com/briankohles/Brackets-GraphvizPreview) into the field, and click "Install"
 
 ### How To Use
 When a Graphviz DOT format document (with extension ".gv" or ".gvdot") is open, a "gv" icon is shown in the 
