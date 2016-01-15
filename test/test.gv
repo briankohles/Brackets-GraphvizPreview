@@ -1,4 +1,0 @@
-digraph test1 {
-	test -> success
-}
-

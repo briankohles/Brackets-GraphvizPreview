@@ -1,6 +1,0 @@
-digraph test1 {
-	node [shape=square]
-	Hello -> World
-	
-}
-
