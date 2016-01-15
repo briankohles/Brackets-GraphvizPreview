@@ -1,5 +1,10 @@
 # Graphviz Preview
 
+# TODO:
+
+- [ ] add examples
+- [ ] create icon
+
 A [Brackets](https://brackets.io) extension that provides a live preview of [Graphviz](http://www.graphviz.org) DOT format documents. 
 
 ![Alt text](./screenshots/graphviz-preview.png?raw=true "Graphviz Preview")
