@@ -4,6 +4,7 @@
 
 - [ ] add examples
 - [ ] create icon
+- [ ] update screenshot to use new icon
 
 A [Brackets](https://brackets.io) extension that provides a live preview of [Graphviz](http://www.graphviz.org) DOT format documents. 
 
