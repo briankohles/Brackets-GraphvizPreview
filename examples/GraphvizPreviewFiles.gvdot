@@ -1,0 +1,8 @@
+graph files {
+	subgraph cluster_0 {
+		label="examples"
+		// nodes
+		cluster.gvdot
+		
+	}
+}
