@@ -1,14 +1,8 @@
 # Graphviz Preview
 
-# TODO:
-
-- [ ] add examples
-- [ ] create icon
-- [ ] update screenshot to use new icon
-
 A [Brackets](https://brackets.io) extension that provides a live preview of [Graphviz](http://www.graphviz.org) DOT format documents. 
 
-![Alt text](./screenshots/graphviz-preview.png?raw=true "Graphviz Preview")
+![Graphviz Preview](./screenshots/ScreenShot.png "Graphviz Preview")
 
 ### Installation
 
@@ -17,9 +11,7 @@ A [Brackets](https://brackets.io) extension that provides a live preview of [Gra
 * Paste [https://github.com/briankohles/Brackets-GraphvizPreview](https://github.com/briankohles/Brackets-GraphvizPreview) into the field, and click "Install"
 
 ### How To Use
-When a Graphviz DOT format document (with extension ".gv" or ".gvdot") is open, a "gv" icon is shown in the 
-toolbar at the right of the Brackets window. Click this icon to open the preview panel. The panel can be 
-resized vertically.
+When a Graphviz DOT format document (with extension ".gv" or ".gvdot") is open, a "GV" icon is shown in the toolbar at the right of the Brackets window. Click this icon to open the preview panel. The panel can be resized vertically.
 
 The preview is updated as you edit the document. You can hover over links to see the href in a tooltip,
 or click them to open in your default browser.
@@ -29,6 +21,7 @@ Hover over the preview area to show the settings "gear" icon. Click this icon to
 ### About Graphviz and the DOT Language
 
 Documentation of the DOT language can be found at:
+
 * [Graphviz Documentation](http://www.graphviz.org/Documentation.php)
 * [The DOT Language](http://www.graphviz.org/content/dot-language)
 * [Node, Edge and Graph Attributes](http://www.graphviz.org/content/attrs)
@@ -38,7 +31,9 @@ Documentation of the DOT language can be found at:
 
 ### Credits
 This extension is based on the MarkdownPreview extension by Glenn Ruehle
+
 * [MarkdownPreview](https://github.com/gruehle/MarkdownPreview) - Markdown viewer for Brackets
+
 >MarkdownPreview LICENSE
 >
 >Copyright (c) 2012 Glenn Ruehle. All rights reserved.
@@ -62,7 +57,9 @@ This extension is based on the MarkdownPreview extension by Glenn Ruehle
 >DEALINGS IN THE SOFTWARE.
 
 This extension uses the following open source components:
+
 * [viz.js](https://github.com/mdaines/viz.js/) - A JavaScript based Graphviz rendering engine that draws using SVG
+
 >viz.js LICENSE
 >
 >Copyright (c) 2014-2015, Michael Daines
