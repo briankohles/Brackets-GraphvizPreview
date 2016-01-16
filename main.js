@@ -252,18 +252,18 @@ define(function (require, exports, module) {
 	// console.log("CURLY-L:"+(docText.match(/\{/g).length) || []);
 	// console.log("CURLY-R:"+(docText.match(/\}/g).length) || []);
 	// return false if curly count is off
-	if ((docText.match(/\{/g).length) != (docText.match(/\}/g).length)) {
+	if (docText.match(/\{/g) && (docText.match(/\{/g).length) != (docText.match(/\}/g).length)) {
 		return false;
 	}
 	// return false if square count is off
 	// console.log("SQUARE-L:"+(docText.match(/\[/g).length) || []);
 	// console.log("SQUARE-R:"+(docText.match(/\]/g).length) || []);
-	if ((docText.match(/\[/g).length) != (docText.match(/\]/g).length)) {
+	if (docText.match(/\[/g) && (docText.match(/\[/g).length) != (docText.match(/\]/g).length)) {
 		return false;
 	}
 	// return false if odd number of quotes
 	// console.log("QUOTES:"+(docText.match(/\"/g).length)%2 || []);
-	if ((docText.match(/\"/g).length)%2 > 0) {
+	if (docText.match(/\"/g) && (docText.match(/\"/g).length)%2 > 0) {
 		return false;
 	}
 
